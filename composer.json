@@ -3,7 +3,12 @@
   "type": "library",
   "description": "PhpSpreadsheet wrapper with shortcut functionality for easily manipulating cells and ranges of cells in chained method calls",
   "license": "MIT",
-
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:Tactics/TacticalExcel.git"
+    }
+  ],
   "authors": [
     {
       "name": "Tom De Roo",
