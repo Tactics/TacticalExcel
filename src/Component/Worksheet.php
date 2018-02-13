@@ -1,6 +1,6 @@
 <?php
 
-namespace Component;
+namespace TacticalExcel\Component;
 
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet as PhpSpreadsheet;

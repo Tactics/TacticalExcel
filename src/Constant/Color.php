@@ -1,6 +1,6 @@
 <?php
 
-namespace Constant;
+namespace TacticalExcel\Constant;
 
 
 class Color

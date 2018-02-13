@@ -1,13 +1,13 @@
 <?php
 
-namespace Component;
+namespace TacticalExcel\Component;
 
 
-use Decorator\StyleAware;
-use Decorator\Traits\BackgroundColorTrait;
-use Decorator\Traits\BorderTrait;
-use Decorator\Traits\FontTrait;
 use PhpOffice\PhpSpreadsheet\Style\Style;
+use TacticalExcel\Decorator\StyleAware;
+use TacticalExcel\Decorator\Traits\BackgroundColorTrait;
+use TacticalExcel\Decorator\Traits\BorderTrait;
+use TacticalExcel\Decorator\Traits\FontTrait;
 
 class Cell implements StyleAware
 {

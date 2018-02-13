@@ -1,11 +1,11 @@
 <?php
 
-namespace Decorator\Traits;
+namespace TacticalExcel\Decorator\Traits;
 
 
-use Constant\Color;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Style;
+use TacticalExcel\Constant\Color;
 
 trait BorderTrait
 {

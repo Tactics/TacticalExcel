@@ -1,6 +1,6 @@
 <?php
 
-namespace Decorator;
+namespace TacticalExcel\Decorator;
 
 
 use PhpOffice\PhpSpreadsheet\Style\Style;
