@@ -1,0 +1,21 @@
+{
+  "name": "tactics/tactical-excel",
+  "type": "library",
+  "description": "PhpSpreadsheet wrapper with shortcut functionality for easily manipulating cells and ranges of cells in chained method calls",
+  "license": "MIT",
+
+  "authors": [
+    {
+      "name": "Tom De Roo",
+      "email": "tom.deroo@tactics.be",
+      "homepage": "https://github.com/Tactics"
+    }
+  ],
+  "require":{
+    "php": "^5.6|^7.0",
+    "phpoffice/phpspreadsheet": "dev-master"
+  },
+  "psr-4": {
+    "TacticalExcel\\": "src/"
+  }
+}
