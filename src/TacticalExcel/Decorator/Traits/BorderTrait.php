@@ -22,7 +22,7 @@ trait BorderTrait
         $style
             ->applyFromArray([
                 'borders' => [
-                    'allborders' => [
+                    'allBorders' => [
                         'borderStyle' => $border,
                         'color' => [
                             'rgb' => $rgb ? : $style->getFont()->getColor()->getRGB(),
