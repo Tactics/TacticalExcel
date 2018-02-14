@@ -3,6 +3,9 @@
 namespace TacticalExcel\Component;
 
 
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use TacticalExcel\Decorator\StyleAware;
 use TacticalExcel\Decorator\Traits\BackgroundColorTrait;
@@ -19,11 +22,20 @@ class Cell implements StyleAware
     private $sheet;
     /** @var \PhpOffice\PhpSpreadsheet\Cell\Cell */
     private $cell;
+    /** @var string */
+    private $column;
+    /** @var int */
+    private $row;
+    /** @var string */
+    private $coordinate;
 
     public function __construct(\PhpOffice\PhpSpreadsheet\Cell\Cell $cell, Worksheet $sheet)
     {
         $this->cell = $cell;
         $this->sheet = $sheet;
+        $this->column = $cell->getColumn();
+        $this->row = $cell->getRow();
+        $this->coordinate = $cell->getCoordinate();
     }
 
     public function getSpreadsheetCell()
@@ -50,61 +62,56 @@ class Cell implements StyleAware
 
     /* * * identification * * */
 
-    public function __toString()
-    {
-        return $this->cell->getCoordinate();
-    }
+    /** @return string */
+    public function __toString(){return $this->coordinate;}
 
+    /**
+     * @return int
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
     public function getColumn()
     {
-        return $this->cell->getColumn();
+        return Coordinate::columnIndexFromString($this->column);
     }
 
-    public function getRow()
+    /** @return int */
+    public function getRow(){return $this->row;}
+
+    /* * * valuation * * */
+
+    /**
+     * @param $value
+     * @return $this
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function setValue($value)
     {
-        return $this->cell->getRow();
+        $this->cell->setValue($value);
+        return $this;
     }
 
-    /* * * orientation * * */
-
-    public function left($step = 1)
+    /**
+     * @param \DateTimeInterface $value
+     * @param string $format
+     * @return $this
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function setDateTimeValue(\DateTimeInterface $value, $format = NumberFormat::FORMAT_DATE_YYYYMMDD2)
     {
-        if ($step < 1) {
-            $step = 1;
-        }
-
-        $column = (int) $this->getColumn() - $step;
-        return $this->sheet->getCellByColumnAndRow($column, $this->getRow());
+        $this->cell->setValue(Date::PHPToExcel($value));
+        $this->cell->getStyle()->getNumberFormat()->setFormatCode($format);
+        return $this;
     }
 
-    public function right($step = 1)
+    /**
+     * @param bool $autosize
+     * @return $this
+     */
+    public function autosize($autosize = true)
     {
-        if ($step < 1) {
-            $step = 1;
-        }
+        $this->sheet->getColumnDimensionByColumn($this->getColumn())->setAutoSize($autosize);
+        return $this;
 
-        $column = (int) $this->getColumn() + $step;
-        return $this->sheet->getCellByColumnAndRow($column, $this->getRow());
-    }
-
-    public function up($step = 1)
-    {
-        if ($step < 1) {
-            $step = 1;
-        }
-
-        $column = (int) $this->getRow() - $step;
-        return $this->sheet->getCellByColumnAndRow($column, $this->getRow());
-    }
-
-    public function down($step = 1)
-    {
-        if ($step < 1) {
-            $step = 1;
-        }
-
-        $column = (int) $this->getRow() + $step;
-        return $this->sheet->getCellByColumnAndRow($column, $this->getRow());
     }
 //
 //
