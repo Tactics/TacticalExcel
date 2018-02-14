@@ -91,14 +91,14 @@ class Cell implements StyleAware
     }
 
     /**
-     * @param \DateTimeInterface $value
+     * @param $value
      * @param string $format
      * @return $this
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    public function setDateTimeValue(\DateTimeInterface $value, $format = NumberFormat::FORMAT_DATE_YYYYMMDD2)
+    public function setDateTimeValue($value, $format = NumberFormat::FORMAT_DATE_YYYYMMDD2)
     {
-        $this->cell->setValue(Date::PHPToExcel($value));
+        $this->cell->setValue(Date::PHPToExcel($value) ? : null);
         $this->cell->getStyle()->getNumberFormat()->setFormatCode($format);
         return $this;
     }
