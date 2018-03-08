@@ -103,6 +103,19 @@ class Cell implements StyleAware
         return $this;
     }
 
+    /* * * markup * * */
+
+    /**
+     * @param int $width
+     * @return $this
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function width($width)
+    {
+        $this->sheet->getColumnDimensionByColumn($this->getColumn())->setWidth($width);
+        return $this;
+    }
+
     /**
      * @param bool $autosize
      * @return $this
