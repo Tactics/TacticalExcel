@@ -12,10 +12,10 @@ class Spreadsheet extends PhpSpreadsheet
         $this->removeSheetByIndex(0);
     }
 
-    public function addSheetWithTitle($title)
+    public function addSheetWithTitle($title, $sheetIndex = null)
     {
         $sheet = new Worksheet($this, $title);
-        $this->addSheet($sheet);
+        $this->addSheet($sheet, $sheetIndex);
         return $this;
     }
 
