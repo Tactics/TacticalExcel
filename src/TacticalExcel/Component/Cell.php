@@ -4,6 +4,7 @@ namespace TacticalExcel\Component;
 
 
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Style;
@@ -77,7 +78,9 @@ class Cell implements StyleAware
     /** @return int */
     public function getRow(){return $this->row;}
 
-    /* * * valuation * * */
+    /* * * ========= * * */
+    /* * * VALUATION * * */
+    /* * * ========= * * */
 
     /**
      * @param $value
@@ -102,6 +105,60 @@ class Cell implements StyleAware
         $this->cell->getStyle()->getNumberFormat()->setFormatCode($format);
         return $this;
     }
+
+  /* * * ============ * * */
+  /* * * TYPE CASTING * * */
+  /* * * ============ * * */
+
+  /**
+   * @return $this
+   */
+  public function castInteger()
+  {
+      $this->cell->setDataType(DataType::TYPE_NUMERIC)->getStyle()->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER);
+
+      return $this;
+  }
+
+  /**
+   * @return $this
+   */
+  public function castFloat()
+  {
+      $this->cell->setDataType(DataType::TYPE_NUMERIC)->getStyle()->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_NUMBER_00);
+
+      return $this;
+  }
+
+  /**
+   * @return $this
+   */
+  public function castPercentage()
+  {
+      $this->cell->setDataType(DataType::TYPE_NUMERIC)->getStyle()->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_PERCENTAGE_00);
+
+      return $this;
+  }
+
+  /**
+   * @return $this
+   */
+  public function castEuro()
+  {
+      $this->cell->setDataType(DataType::TYPE_NUMERIC)->getStyle()->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE);
+
+      return $this;
+  }
+
+  /**
+   * @return $this
+   */
+  public function castString()
+  {
+      $this->cell->setDataType(DataType::TYPE_STRING);
+
+      return $this;
+  }
 
     /* * * markup * * */
 
